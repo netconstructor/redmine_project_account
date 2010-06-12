@@ -1,0 +1,6 @@
+# English strings go here for Rails i18n
+en:
+  field_amount: Amount
+  field_date: Date
+  field_description: Description
+        

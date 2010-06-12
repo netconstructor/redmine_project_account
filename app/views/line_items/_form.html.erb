@@ -1,0 +1,11 @@
+<% form_for(@line_item, :url => {:action => 'create'}) do |f| %>
+  <tr class="form">
+    <td class="date">
+      <%=f.hidden_field(:project_id)%>
+      <%=f.text_field(:date) %><%= calendar_for('line_item_date') %>
+    </td>
+    <td class="description"><%=f.text_field(:description) %></td>
+    <td class="amount"><%=f.text_field(:amount) %></td>
+    <td class="controls"><%=image_submit_tag('true.png') %></td>
+  </tr>
+<% end %>

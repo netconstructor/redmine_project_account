@@ -1,0 +1,40 @@
+table.list .controls {
+  width: 20px;
+  text-align: left;
+}
+table.list .amount {
+  width: 120px;
+  text-align: right;
+}
+table.list .amount.total {
+  font-weight: bold;
+  font-size: 1.2em;
+}
+table.list .date {
+  width: 150px;
+}
+table.list .date, table.list .description {
+  text-align: left;
+}
+
+table.list tr.form td.date input {
+  width: 75%;
+}
+table.list tr.form td.description input {
+  width: 95%;
+}
+table.list tr.form td.amount input {
+  width: 115px;
+  text-align: right;
+}
+table.list td.balance-marker {
+  width: 20px;
+  text-align: left;
+}
+table.list .credit .amount {
+  color: #f00;
+}
+table.list tr.future td {
+  background-color: #f6f6f6;
+  opacity: 0.55;
+}
