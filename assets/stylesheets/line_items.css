@@ -2,7 +2,7 @@ table.list .controls {
   width: 20px;
   text-align: left;
 }
-table.list .amount {
+table.list .amount, table.list .balance {
   width: 120px;
   text-align: right;
 }
@@ -33,6 +33,9 @@ table.list td.balance-marker {
 }
 table.list .credit .amount {
   color: #f00;
+}
+table.list .credit .description {
+  font-style: italic;
 }
 table.list tr.future td {
   background-color: #f6f6f6;

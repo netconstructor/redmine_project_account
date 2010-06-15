@@ -11,11 +11,13 @@
       <th class="date">Date</th>
       <th class="description">Description</th>
       <th class="amount">Amount</th>
+      <th class="balance">Balance</th>
       <th class="controls">&nbsp;</th>
     </tr>
   </thead>
   <tbody>
     <%- output_form = false -%>
+    <%- running_balance = 0.0 -%>
     <% @line_items.each do |line_item| %>
       <% if line_item.future? and !output_form %>
         <%=render :partial => 'form' %>
@@ -31,6 +33,7 @@
           <%=h line_item.description %>
         </td>
         <td class="amount"><%=number_to_currency line_item.amount %></td>
+        <td class="balance"><%=number_to_currency(running_balance += line_item.amount) %></td>
         <td class="controls"><%=link_to("", {:action => :destroy, :project_id => project.id, :id => line_item.id}, 
                                             :class => 'icon icon-del', :confirm => "Are you sure?") %></td>
       </tr>
@@ -39,7 +42,7 @@
   </tbody>
   <tfoot>
     <tr>
-      <% balance = project_account.current_balance%>
+      <% balance = project_account.current_balance %>
       <td colspan="2" class="amount total">&nbsp;</td>
       <td class="amount total"><%=number_to_currency balance.abs %></td>
       <td class="controls amount total balance-marker">
