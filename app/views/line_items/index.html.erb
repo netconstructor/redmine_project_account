@@ -33,7 +33,8 @@
           <%=h line_item.description %>
         </td>
         <td class="amount"><%=number_to_currency line_item.amount %></td>
-        <td class="balance"><%=number_to_currency(running_balance += line_item.amount) %></td>
+        <%- running_balance += line_item.amount ->%>
+        <td class="balance <%='zero' if running_balance == 0.0 %> <%='negative' if running_balance < 0.0 %>"><%=number_to_currency(running_balance) %></td>
         <td class="controls"><%=link_to("", {:action => :destroy, :project_id => project.id, :id => line_item.id}, 
                                             :class => 'icon icon-del', :confirm => "Are you sure?") %></td>
       </tr>

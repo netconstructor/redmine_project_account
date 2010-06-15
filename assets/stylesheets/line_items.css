@@ -41,3 +41,9 @@ table.list tr.future td {
   background-color: #f6f6f6;
   opacity: 0.55;
 }
+table.list .balance.negative {
+  color: #f00;
+}
+table.list .balance.zero {
+  font-weight: bold;
+}
