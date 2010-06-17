@@ -3,10 +3,20 @@ class ProjectAccount
   
   def initialize( project )
     @project = project
+    @line_items = nil
   end
   
   def line_items
-    @line_items ||= LineItem.for_project(project)
+    @line_items || line_items!
+  end
+  
+  def line_items!
+    @line_items = LineItem.for_project(project)
+    balance = 0.0
+    @line_items.each do |li|
+      @line_items.balance = (balance += li.amount)
+    end
+    @line_items
   end
   
   def future_items?

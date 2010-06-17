@@ -9,6 +9,8 @@ class LineItem < ActiveRecord::Base
   named_scope :for_project, lambda {|p| {:conditions => ["project_id IN(#{ProjectAccount.new(p).project_self_and_descendants_ids.join(',')})"], 
                                          :order => 'date ASC, amount DESC'} }
   
+  attr_accessor :balance
+  
   def self.project_balance( project )
     for_project(project).sum(:amount)
   end
