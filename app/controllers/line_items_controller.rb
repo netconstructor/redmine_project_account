@@ -51,6 +51,6 @@ class LineItemsController < ApplicationController
   end
   
   def find_line_items
-    @line_items = LineItem.for_project(project)
+    @line_items = ProjectAccount.new(project).line_items
   end
 end
