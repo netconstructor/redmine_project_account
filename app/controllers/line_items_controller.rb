@@ -4,15 +4,14 @@ class LineItemsController < ApplicationController
   helper_method :project, :project_account
   
   def index
-    find_line_items
+    @line_items = project_account.line_items
     @line_item = LineItem.new(:project => project)
     respond_to do |wants|
       wants.html {}
       # TODO CSV export wants.csv { render :text => 'foo'} 
-      # TODO PDF export wants.pdf { render :text => 'foo'}
     end
   end
-
+  
   def create
     @line_item = LineItem.new(params[:line_item].reverse_merge(:project => project))
     if @line_item.save
@@ -24,15 +23,7 @@ class LineItemsController < ApplicationController
       render :action => 'index'
     end
   end
-
-  def edit
-    @line_item = LineItem.for_project(project).find(params[:id])
-  end
-
-  def update
-    @line_item = LineItem.for_project(project).find(params[:id])
-  end
-
+  
   def destroy
     @line_item = LineItem.for_project(project).find(params[:id])
     @line_item.destroy
@@ -48,9 +39,5 @@ class LineItemsController < ApplicationController
   
   def project_account
     @project_account||= ProjectAccount.new(project)
-  end
-  
-  def find_line_items
-    @line_items = ProjectAccount.new(project).line_items
   end
 end

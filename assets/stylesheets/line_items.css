@@ -27,6 +27,10 @@ table.list tr.form td.amount input {
   width: 115px;
   text-align: right;
 }
+table.list tr.form td.controls {
+  width: 140px;
+  text-align: left;
+}
 table.list td.balance-marker {
   width: 20px;
   text-align: left;
@@ -46,4 +50,9 @@ table.list .balance.negative {
 }
 table.list .balance.zero {
   font-weight: bold;
+}
+
+h2 span.controls {
+  font-size: 0.7em;
+  float: right;
 }
