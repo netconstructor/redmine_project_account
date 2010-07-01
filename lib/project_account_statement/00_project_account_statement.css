@@ -1,0 +1,115 @@
+.cl {float:left;clear:both;width:100%;height:0;}
+.sep {width: 100%;border: 1px solid black;float:left;clear:both;margin: 3px 0 5px 0;}
+/* Header */
+#header-left {
+  width: 60%;
+  float: left;
+  clear: left;
+}
+#header-left h1 {
+  text-align: left;
+  font-size: 18pt;
+  padding: 0;
+  margin: 0;
+}
+#header-right {
+  width: 40%;
+  float: left;
+  clear: right;
+}
+#header-right h2 {
+  width: 100%;
+  float: left;
+  text-align: right;
+  clear: both;
+  font-size: 14pt;
+  padding: 0;
+  margin: 0;
+}
+#header-right p {
+  float: left;
+  width: 50%;
+  font-size: 6pt;
+  text-align: center;
+}
+
+#header-to {
+  width: 70%;
+  float: left;
+  clear: left;
+}
+#header-to h1 {
+  font-size: 12pt;
+  padding: 0;
+  margin: 0;
+}
+#header-date {
+  width: 30%;
+  float: right;
+  clear: right;
+  text-align: right;
+}
+#header-amount-due {
+  width: 40%;
+  float: right;
+  clear: right;
+  text-align: right;
+  font-size: 14pt;
+  margin: 10px 15px 0 0;
+}
+#header-amount-due span {
+  font-weight: bold;
+}
+/* Table */
+table {
+  font-size: 8pt;
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+table.list td, table.list th {
+  margin: 0;
+  padding: .03in 0 .03in 0;
+}
+table.list .amount, table.list .balance {
+  text-align: right;
+  width: 1in;
+}
+table.list .date {
+  text-align: left;
+  width: 1.25in;
+}
+table.list .description {
+  text-align: left;
+  width: 5in;
+}
+table.list td.balance-marker {
+  width: 0.25in;
+  text-align: right;
+}
+table.list .amount.total {
+  font-weight: bold;
+  font-size: 1.2em;
+}
+
+table.list tr.even {
+  background-color: #f6f6f6;
+}
+table.list td {
+  border-top: 1px solid #000;
+}
+table.list .credit .amount {
+  color: #f00;
+}
+table.list .credit .description {
+  font-style: italic;
+}
+table.list tr.future td {
+  background-color: #f6f6f6;
+  opacity: 0.55;
+}
+table.list .balance.negative {
+  color: #f00;
+}
+table.list .balance.zero {
+  font-weight: bold;
+}

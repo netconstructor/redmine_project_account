@@ -1,11 +1,11 @@
 <% content_for :header_tags do %>
     <%= stylesheet_link_tag 'line_items', :plugin => 'redmine_project_account' %>
 <% end %>
-<% html_title "Account" -%>
+<% html_title "Statement" -%>
 
-<h2>Account <span class="controls"><%=link_to 'PDF Statement', :action => 'statement', :project_id => project.id, :format => 'pdf', :amount_due => 'true' %></span></h2>
+<h2>Statement <span class="controls"><%=link_to 'Back to Account', :action => 'index', :project_id => project.id %></span></h2>
 
-<table class="list">
+<table class="list statement">
   <thead>
     <tr>
       <th class="date">Date</th>
@@ -16,13 +16,7 @@
     </tr>
   </thead>
   <tbody>
-    <%- output_form = false -%>
     <% @line_items.each do |line_item| %>
-      <% if line_item.future? and !output_form %>
-        <%=render :partial => 'form' if authorize_for('line_items', 'create') %>
-        <%- output_form = true -%>
-      <% end %>
-      
       <tr class="<%='credit' if line_item.credit? %> <%='future' if line_item.future? %>">
         <td class="date"><%=line_item.date.strftime %></td>
         <td class="description">
@@ -33,11 +27,9 @@
         </td>
         <td class="amount"><%=number_to_currency line_item.amount %></td>
         <td class="balance <%='zero' if line_item.balance == 0.0 %> <%='negative' if line_item.balance < 0.0 %>"><%=number_to_currency(line_item.balance) %></td>
-        <td class="controls"><%=link_to("", {:action => :destroy, :project_id => project.id, :id => line_item.id}, 
-                                            :class => 'icon icon-del', :confirm => "Are you sure?") if authorize_for('line_items', 'create') %></td>
+      	<td class="controls">&nbsp;</th>
       </tr>
     <% end %>
-    <%=render :partial => 'form' if authorize_for('line_items', 'create') and !output_form %>
   </tbody>
   <tfoot>
     <tr>
@@ -48,17 +40,5 @@
         <% if balance < 0.0 %><span class="credit-marker">CR</span><% end %>
       </td>
     </tr>
-    <% if project_account.future_items? %>
-      <tr class="future">
-        <% balance = project_account.final_balance %>
-        <td colspan="3" class="amount total">
-          Projected Balance as of <%= @line_items.last.date.strftime %>
-        </td>
-        <td class="amount total"><%=number_to_currency balance.abs %></td>
-        <td class="controls amount total balance-marker">
-          <% if balance < 0.0 %><span class="credit-marker">CR</span><% end %>
-        </td>
-      </tr>
-    <% end %>
   </tfoot>
 </table>

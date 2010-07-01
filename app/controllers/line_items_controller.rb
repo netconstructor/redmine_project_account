@@ -12,6 +12,24 @@ class LineItemsController < ApplicationController
     end
   end
   
+  def statement
+    @line_items = project_account.line_items_statement
+    respond_to do |wants|
+      wants.html {}
+      wants.pdf do
+        statement = if params[:amount_due] == 'true'
+            project_account.pdf_statement(true)
+          elsif params[:amount_due]
+            project_account.pdf_statement(params[:amount_due].to_f)
+          else
+            project_account.pdf_statement
+          end
+        send_data statement.to_pdf, :filename => statement.filename, 
+                                    :type => "application/pdf"
+      end
+    end
+  end
+  
   def create
     @line_item = LineItem.new(params[:line_item].reverse_merge(:project => project))
     if @line_item.save

@@ -1,0 +1,69 @@
+<div id="header-left">
+  <h1>Operis Systems, LLC</h1>
+</div>
+<div id="header-right">
+  <h2>Statement</h2>
+  <p class="contact">
+    (256) 712-4164<br />
+    support@operissystems.com
+  </p>
+  <p class="address">
+    205 S. Seminary St.<br />
+    Suite 204E<br />
+    Florence, AL 35630
+  </p>
+</div>
+
+<div class="sep"></div>
+
+<div id="header-to">
+  <h1><%=h project.name %></h1>
+</div>
+
+<div id="header-date">
+  <%=Date.today.strftime('%Y %B %-d') %>
+</div>
+<table class="list statement">
+  <thead>
+    <tr>
+      <th class="date">Date</th>
+      <th class="description">Description</th>
+      <th class="amount">Amount</th>
+      <th class="balance">Balance</th>
+      <th class="controls">&nbsp;</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% project_account.line_items.each do |line_item| %>
+      <tr class="<%=cycle("even", "odd") %> <%='credit' if line_item.credit? %> <%='future' if line_item.future? %>">
+        <td class="date"><%=line_item.date.strftime %></td>
+        <td class="description">
+          <% unless project_account.project.id == line_item.project_id %>
+            <%=h line_item.project.name %> &mdash;
+          <% end %>
+          <%=h line_item.description %>
+        </td>
+        <td class="amount"><%=number_to_currency line_item.amount %></td>
+        <td class="balance <%='zero' if line_item.balance == 0.0 %> <%='negative' if line_item.balance < 0.0 %>"><%=number_to_currency(line_item.balance) %></td>
+      	<td class="controls">&nbsp;</th>
+      </tr>
+    <% end %>
+  </tbody>
+  <tfoot>
+    <tr>
+      <% balance = project_account.current_balance %>
+      <td colspan="3" class="amount total">&nbsp;</td>
+      <td class="amount total"><%=number_to_currency balance.abs %></td>
+      <td class="controls amount total balance-marker">
+        <% if balance < 0.0 %><span class="credit-marker">CR</span><% end %>
+      </td>
+    </tr>
+  </tfoot>
+</table>
+
+<% if amount_due > 0.0 %>
+  <div id="header-amount-due">
+    Amount Due: <span><%=number_to_currency amount_due %></span><br />
+    Due By: <span><%=(Date.today+30.days).strftime('%Y %B %-d') %></span>
+  </div>
+<% end %>
